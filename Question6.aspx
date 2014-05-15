@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <link rel="stylesheet" href="mystyle.css" type="text/css" />
 
-    <%--<script src="GraphFunction.js" type="text/javascript"></script>--%>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
@@ -150,6 +149,8 @@
                     });
                 }
             }
+            // Create counter for number correct
+            var numCorrect = 0;
 
             // Create 21 rows
             for (var i = 1; i <= 21; i++) {
@@ -170,6 +171,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'bottom' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(12, 100) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (11,99)
@@ -180,6 +182,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'top' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(11, 99) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (10,96)
@@ -190,6 +193,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'center' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(10, 96) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (9,91)
@@ -200,6 +204,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'bottom' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(9, 91) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (8,82)
@@ -210,6 +215,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'center' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(8, 82) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (7,64)
@@ -220,6 +226,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'top' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(7, 64) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (6,43)
@@ -230,6 +237,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'center' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(6, 43) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (5,26)
@@ -240,6 +248,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'bottom' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(5, 26) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (4,15)
@@ -250,6 +259,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'top' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(4, 15) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (3,8)
@@ -260,6 +270,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'center' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(3, 8) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (2,4)
@@ -270,6 +281,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'top' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(2, 4) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (1,2)
@@ -280,6 +292,7 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'center' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(1, 2) is correct!');
+                                numCorrect += 1;
                             }
 
                             // (0,1)
@@ -290,27 +303,28 @@
                                 ui.draggable.position({ of: $(this), my: 'center', at: 'bottom' });
                                 ui.draggable.draggable('option', 'revert', false);
                                 alert('(0, 1) is correct!');
+                                numCorrect += 1;
+                            }
+
+                            if (numCorrect == 13) {
+                                document.getElementById('<%=Button1.ClientID %>').style.visibility = "";
                             }
 
                         }
                     });
                 }
             }
-
         }
-
     </script>
         
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+    <input id="NumberCorrect" type="hidden" runat="server" />
     
      <table align="center" style="width:300px">
 <tr>
   <td><div id="content">
-      
-      <%--<script type="text/javascript">
-          document.body.onload = init();
-    </script>--%>
 
         <p>Drag the points to their appropriate place on the graph.</p>
         <table border="1">
@@ -432,7 +446,10 @@
 </tr>
 <tr>
   <td>
-      <asp:Button ID="Button1"  PostBackUrl="Question8.aspx" runat="server" Text="Next" />
+      <asp:Button ID="Button1" PostBackUrl="Question8.aspx" runat="server" Text="Next" />
+      <script type="text/javascript">
+          document.getElementById('<%=Button1.ClientID %>').style.visibility = "hidden";
+    </script>
     </td>
 </tr>
         </table>
